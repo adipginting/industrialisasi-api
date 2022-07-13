@@ -1,0 +1,40 @@
+{
+  "name": "industrialisasi-blog",
+  "version": "1.0.0",
+  "description": "industrialisasi-blog backend.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon ./src/index.js",
+    "test": "jest ./tests",
+    "int-test": "jest ./int-tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adipginting/industrialisasi-blog.git"
+  },
+  "keywords": [
+    "blog",
+    "nodejs",
+    "expressjs"
+  ],
+  "author": "Adi Ginting",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adipginting/industrialisasi-blog/issues"
+  },
+  "homepage": "https://github.com/adipginting/industrialisasi-blog#readme",
+  "dependencies": {
+    "argon2": "^0.28.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19",
+    "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.19.0",
+    "jest": "^28.1.2",
+    "mock2": "^0.0.17",
+    "supertest": "^6.2.4"
+  }
+}
