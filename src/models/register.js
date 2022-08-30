@@ -1,16 +1,19 @@
-const Pool = require('pg').Pool;
+const { Pool } = require('pg');
 const argon2 = require('argon2');
 
-const pool = Pool();
+const pool = new Pool();
 
-const register = (
-  async (username, email, password) => {
-    const hash = await argon2(password, {
-      type: argon2i,
-    });
+const store_login_informations = async (username, email, password) => {
+  const hash = await argon2.hash(password, {
+    type: argon2.argon2i,
+  });
 
-    const result = await pool.query('INSERT INTO login_informations VALUES ($username, $email, $hash', [username, email, hash]);
-    console.log(result);
-  })();
+  await pool.query('INSERT INTO login_informations VALUES ($1, $2, $3)', [username, email, hash])
+    .catch(error => console.error(error));
+};
+
+const register = (username, email, password) => {
+  store_login_informations(username, email, password);
+};
 
 module.exports = register;
