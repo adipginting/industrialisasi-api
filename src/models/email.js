@@ -1,18 +1,21 @@
 const { Pool } = require('pg');
 const pool = new Pool();
 
-const does_email_exist = async (email) => {
+const check_email_on_db = async (email) => {
+  const db_email = '';
   try{
-    const { data:status } = await pool.query('SELECT * FROM login_informations WHERE email=$1)', [email]);
-    return status;
+    await pool.query('SELECT EXISTS (SELECT * FROM login_informations WHERE email=$1', [email])
+      .then(res => {db_email = res.rows[0]['email']}, err => {return (err)});
+    console.log(db_email);
+    return db_email;
   } catch(error) {
-    console.log(error);
+    return error;
   }
 };
 
 const email = (email) => {
-  let email_on_db = '';
-  does_email_exist(email).then(status => {email_on_db = status});
+  let email_on_db;
+  check_email_on_db(email).then(result => {email_on_db = result}, error => {console.error(error)});
   return email_on_db;
 };
 
