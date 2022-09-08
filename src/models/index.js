@@ -1,3 +1,6 @@
 const register = require('./register');
+const email = require('./email');
 
-module.exports = { register };
+module.exports =  { register,
+                    email
+                  };
