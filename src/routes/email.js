@@ -2,8 +2,14 @@ const router = require('express').Router();
 const models = require('../models');
 
 router.get('/', (req, res) => {
-  const data = models.email(req.body.email);
-  console.log(data);
+  const get_email = async (email) => {
+    const data = await models.email(email);
+    console.log(data);
+    res.send(data);
+  };
+
+  get_email(req.body.email);
+
 });
 
 module.exports = router;
