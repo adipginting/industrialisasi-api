@@ -1,13 +1,11 @@
 const router = require('express').Router();
 const models = require('../models');
 
-router.get('/', (req, res) => {
+router.post('/', (req, res) => {
   const get_email = async (email) => {
     const data = await models.email(email);
-    console.log(data);
-    res.send(data);
+    res.status(200).send(data.rows[0]['exists']);
   };
-
   get_email(req.body.email);
 
 });
