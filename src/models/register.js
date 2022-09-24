@@ -9,7 +9,7 @@ const store_login_informations = async (username, email, password) => {
       type: argon2.argon2i,
     });
     await pool.query('INSERT INTO login_informations VALUES ($1, $2, $3)', [username, email, hash]);
-    console.log('Query success');
+    console.log('User ' + username +' using email ' + email + ' is registered successfully!');
   } catch(error){
     console.error(error);
   }

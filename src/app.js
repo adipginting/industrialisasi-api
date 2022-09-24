@@ -11,5 +11,6 @@ app.use(cors());
 app.use('/register', routes.register);
 app.use('/email', routes.email);
 app.use('/username', routes.username);
+app.use('/sendemail', routes.sendemail);
 
 module.exports = app;

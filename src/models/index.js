@@ -1,8 +1,6 @@
-const register = require('./register');
-const email = require('./email');
-const username = require('./username');
+const register = require("./register");
+const email = require("./email");
+const username = require("./username");
+const sendemail = require('./sendemail');
 
-module.exports =  { register,
-                    email,
-                    username
-                  };
+module.exports = { register, email, username, sendemail };

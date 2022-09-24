@@ -6,7 +6,7 @@ router.post('/', (req, res) => {
     const data = await models.username(username);
     res.status(200).send(data);
   };
-  get_email(req.body.email);
+  get_email(req.body.username);
 
 });
 
