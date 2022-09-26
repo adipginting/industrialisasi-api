@@ -2,11 +2,11 @@ const router = require('express').Router();
 const models = require('../models');
 
 router.post('/', (req, res) => {
-  const get_email = async (username) => {
-    const data = await models.username(username);
+  const getusername = async (_username_) => {
+    const data = await models.username(_username_);
     res.status(200).send(data);
   };
-  get_email(req.body.username);
+  getusername(req.body.username);
 
 });
 

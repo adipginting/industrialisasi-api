@@ -1,6 +1,16 @@
 const nodemailer = require('nodemailer');
 const randomstring = require('randomstring');
+const { Pool } = require('pg');
+const pool = new Pool();
 require('dotenv').config();
+
+const inserttodb = async (_email_, _code_) => {
+  try{
+    await pool.query('INSERT INTO email_verification_codes VALUES($1, $2, now())', [_email_, _code_]);
+  } catch(e) {
+    console.error(e);
+  }
+};
 
 const sendemail = (_email_) => {
   const _code_ = randomstring.generate(6);
@@ -28,9 +38,10 @@ const sendemail = (_email_) => {
       console.error(error);
     }
     else {
-      console.log("Verification email is sent to " + _email_);
+      console.log("A verification email was sent to " + _email_);
     }
   });
+  inserttodb(_email_, _code_);
 };
 
 module.exports = sendemail;
