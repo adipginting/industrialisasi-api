@@ -26,9 +26,9 @@ const sendemail = (_email_) => {
   const message = {
     from: 'adi.industrialisasi@gmail.com',
     to: _email_,
-    subject: 'Your email verification code for industrialisasi is: ' + _code_ + '.',
-    text: 'Thank you for your interest in industrialisasi. Your email verification code is: ' + _code_ + '. \n\nSincerely, \nyour friend at the development of industrialisasi.',
-    html: '<p> Thank you for your interest in industrialisasi. Your email verification code is: ' + _code_ + '.</p> <p> Sincerely,</p> <p> your friend at the development of industrialisasi.</p>'
+    subject: 'Your email verification code for industrialisasi is: ' + _code_,
+    text: 'Thank you for your interest in industrialisasi. This is your verification code. \n' + _code_ + '\nThis code will be valid for five minutes. \nSincerely, \nyour friend at the development of industrialisasi.',
+    html: '<p> Thank you for your interest in industrialisasi. This is your verification code. </p> <p>' + _code_ + '</p><p> This code will be valid for five minutes.</p><p> Sincerely,</p> <p> your friend at the development of industrialisasi.</p>'
   };
 
   const sender = nodemailer.createTransport(connection);

@@ -1,1 +1,3 @@
-#! /bin/s
+#! /bin/sh
+
+psql 
