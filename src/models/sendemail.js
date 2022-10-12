@@ -4,16 +4,16 @@ const { Pool } = require('pg');
 const pool = new Pool();
 require('dotenv').config();
 
-const inserttodb = async (_email_, _code_) => {
+const inserttodb = async (email, code) => {
   try{
-    await pool.query('INSERT INTO email_verification_codes VALUES($1, $2, now())', [_email_, _code_]);
+    await pool.query('INSERT INTO email_verification_codes VALUES($1, $2, now())', [email, code]);
   } catch(e) {
     console.error(e);
   }
 };
 
-const sendemail = (_email_) => {
-  const _code_ = randomstring.generate(6);
+const sendemail = (email) => {
+  const code = randomstring.generate(6);
 
   const connection = {
     service: 'gmail',
@@ -25,10 +25,10 @@ const sendemail = (_email_) => {
 
   const message = {
     from: 'adi.industrialisasi@gmail.com',
-    to: _email_,
-    subject: 'Your email verification code for industrialisasi is: ' + _code_,
-    text: 'Thank you for your interest in industrialisasi. This is your verification code. \n' + _code_ + '\nThis code will be valid for five minutes. \nSincerely, \nyour friend at the development of industrialisasi.',
-    html: '<p> Thank you for your interest in industrialisasi. This is your verification code. </p> <p>' + _code_ + '</p><p> This code will be valid for five minutes.</p><p> Sincerely,</p> <p> your friend at the development of industrialisasi.</p>'
+    to: email,
+    subject: 'Your email verification code for industrialisasi is: ' + code,
+    text: 'Thank you for your interest in industrialisasi. This is your verification code. \n' + code + '\nThis code will be valid for five minutes. \nSincerely, \nyour friend at the development of industrialisasi.',
+    html: '<p> Thank you for your interest in industrialisasi. This is your verification code. </p> <p>' + code + '</p><p> This code will be valid for five minutes.</p><p> Sincerely,</p> <p> your friend at the development of industrialisasi.</p>'
   };
 
   const sender = nodemailer.createTransport(connection);
@@ -38,10 +38,10 @@ const sendemail = (_email_) => {
       console.error(error);
     }
     else {
-      console.log("A verification email was sent to " + _email_);
+      console.log("A verification email was sent to " + email);
     }
   });
-  inserttodb(_email_, _code_);
+  inserttodb(email, code);
 };
 
 module.exports = sendemail;

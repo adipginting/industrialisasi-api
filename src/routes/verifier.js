@@ -4,9 +4,9 @@ const models = require('../models');
 const router = new Router();
 
 router.post('/', (req, res) => {
-  const getverifier = async (_email_, _code_) => {
+  const getverifier = async (email, code) => {
     try {
-      const data = await models.verifier(_email_, _code_);
+      const data = await models.verifier(email, code);
       res.send(data).status(200);
     } catch (error){
       console.error(error);
