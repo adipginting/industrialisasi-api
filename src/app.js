@@ -14,5 +14,6 @@ app.use('/username', routes.username);
 app.use('/sendemail', routes.sendemail);
 app.use('/verifier', routes.verifier);
 app.use('/login', routes.login);
+app.use('/jwtvalidation', routes.jwtvalidation);
 
 module.exports = app;

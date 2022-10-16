@@ -9,7 +9,7 @@ router.post('/', (req, res) => {
     try{
       const hashed_password = await login(username);
       console.log(hashed_password);
-      console.log( "Does it work? " + await argon2.verify(hashed_password, password));
+      console.log( "JWT token generation works? " + await argon2.verify(hashed_password, password));
 
       if (await argon2.verify(hashed_password, password)){
         const user = {'username':username};
