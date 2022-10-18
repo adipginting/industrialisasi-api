@@ -17,6 +17,7 @@ router.post('/', (req, res) => {
           if (err){
             res.sendStatus(403);
           } else {
+            console.log(token);
             res.send(token).status(202);
           }
         });
