@@ -4,16 +4,16 @@ const { Pool } = require('pg');
 const pool = new Pool();
 require('dotenv').config();
 
-const inserttodb = async (email, code) => {
-  try{
-    await pool.query('INSERT INTO email_verification_codes VALUES($1, $2, now())', [email, code]);
-  } catch(e) {
-    console.error(e);
-  }
-};
-
 const sendemail = (email) => {
-  const code = randomstring.generate(6);
+  const inserttodb = async (email, code) => {
+    try{
+      await pool.query('INSERT INTO email_verification_codes VALUES($1, $2, now())', [email, code]);
+    } catch(e) {
+      console.error(e);
+    }
+  };
+
+ const code = randomstring.generate(6);
 
   const connection = {
     service: 'gmail',
@@ -38,7 +38,7 @@ const sendemail = (email) => {
       console.error(error);
     }
     else {
-      console.log("A verification email was sent to " + email);
+      console.log("A verification email was sent to " + email + " " + success);
     }
   });
   inserttodb(email, code);
