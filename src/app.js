@@ -16,5 +16,6 @@ app.use('/verifier', routes.verifier);
 app.use('/login', routes.login);
 app.use('/jwtvalidation', routes.jwtvalidation);
 app.use('/posts', routes.posts);
+app.use('/post', routes.post);
 
 module.exports = app;
