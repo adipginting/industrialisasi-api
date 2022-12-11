@@ -6,21 +6,26 @@ require('dotenv').config();
 
 router.post('/', (req, res) => {
   const does_login_info_match = async (username, password) => {
+    const user = {'username':username};
+    const jwt_token_generation = (expiry_time, isCookie) => {
+      jwt.sign(user, process.env.secret_key, {expiresIn: expiry_time}, (err, token) => {
+        if (err){
+          res.sendStatus(500);
+        } else {
+          if(isCookie)
+            res.cookie('Bearer ' + token, {secure: true, httpOnly: true});
+          else
+            res.send('Bearer ' + token).status(200);
+        }
+      });
+    }
+
     try{
       const hashed_password = await login(username);
-      console.log(hashed_password);
-      console.log( "JWT token generation works? " + await argon2.verify(hashed_password, password));
-
       if (await argon2.verify(hashed_password, password)){
-        const user = {'username':username};
-        jwt.sign(user, process.env.secret_key, {expiresIn: '7d'}, (err, token) => {
-          if (err){
-            res.sendStatus(403);
-          } else {
-            console.log(token);
-            res.send(token).status(202);
-          }
-        });
+        jwt_token_generation('7d', true); //refresh token
+        jwt_token_generation('30m', false); //access token
+
       } else {
         res.sendStatus(403);
       }
