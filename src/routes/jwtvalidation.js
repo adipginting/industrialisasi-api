@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const jwt = require("jsonwebtoken");
+
 require("dotenv").config();
 
 router.get("/", (req, res) => {
