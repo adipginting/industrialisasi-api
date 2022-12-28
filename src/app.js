@@ -10,8 +10,8 @@ app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
 
-//app.use(routes.authorization);
-app.use(routes.root);
+app.use(routes.authorization);
+app.use("/", routes.root);
 app.use("/register", routes.register);
 app.use("/email", routes.email);
 app.use("/username", routes.username);

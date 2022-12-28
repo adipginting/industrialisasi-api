@@ -5,7 +5,7 @@ const { Router } = require('express');
 
 const router = Router();
 router.get('/', (req, res) => {
-  console.log("This hits here");
+  console.log("root.js is called");
   if (res.locals.access_token){
     res.cookie('refresh_token', res.locals.refresh_token, {secure: true, httpOnly: true});
     res.send({'username':res.locals.username, 'access_token':res.locals.access_token}).status(200);

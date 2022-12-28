@@ -6,6 +6,7 @@ require("dotenv").config();
 router.use('/', (req, res, next) => {
   let access_token = ""; //these blocks test if access code exists or is valid
   let is_access_token_valid = false;
+  console.log("It's here");
   if (req.headers.authorization) {
     access_token = req.headers.authorization.split(" ")[1];
     jwt.verify(access_token, process.env.secret_key, (err, result) => {
