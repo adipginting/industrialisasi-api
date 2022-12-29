@@ -7,5 +7,7 @@ const login = require('./login');
 const jwtvalidation = require('./jwtvalidation');
 const posts = require('./posts');
 const post = require('./post');
+const authorization = require('./authorization');
+const root = require('./root');
 
-module.exports = { register, email, username, sendemail, verifier, login, jwtvalidation, posts, post };
+module.exports = { register, email, username, sendemail, verifier, login, jwtvalidation, posts, post, authorization, root };
