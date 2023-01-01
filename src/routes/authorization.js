@@ -6,7 +6,6 @@ require("dotenv").config();
 router.use('/', (req, res, next) => {
   let access_token = ""; //these blocks test if access code exists or is valid
   let is_access_token_valid = false;
-  console.log("It's here");
   if (req.headers.authorization) {
     access_token = req.headers.authorization.split(" ")[1];
     jwt.verify(access_token, process.env.secret_key, (err, result) => {
@@ -23,6 +22,7 @@ router.use('/', (req, res, next) => {
   let is_refresh_token_valid = false;
   if (req.cookies) {
     const cookie_arr = Object.keys(req.cookies);
+    console.log("Cookie: ", cookie_arr);
     for (let i = 0; i < cookie_arr.length; i++) {
       if (cookie_arr[i].includes("Bearer")) {
         refresh_token = cookie_arr[i];

@@ -14,13 +14,6 @@ const register = (username, email, password) => {
         email,
         hash,
       ]);
-      console.log(
-        "User " +
-          username +
-          " using email " +
-          email +
-          " is registered successfully!"
-      );
     } catch (error) {
       console.error(error);
     }
