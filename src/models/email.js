@@ -7,6 +7,8 @@ const email = async (email) => {
     return db_email.rows[0]['exists'];
   } catch(error) {
       throw error;
+  } finally{
+    pool.end();
   }
 };
 

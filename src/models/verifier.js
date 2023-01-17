@@ -1,13 +1,16 @@
 const { Pool } = require('pg');
 const pool = new Pool();
 
-const verifier = async (email, code) => {
+const verifier = async (code) => {
   try{
-    const data = await pool.query(`SELECT EXISTS(SELECT * FROM email_verification_codes WHERE email=$1 AND code=$2 AND (saved_at  > now() - INTERVAL '3 MINUTES'))`, [email, code]);
-    console.log( 'Verifier code is valid for ' + email + " " + data.rows[0]['exists']);
-    return data.rows[0]['exists'];
+    const {rows:[{email}]} = await pool.query(`SELECT email FROM email_verification_codes WHERE code=$1 AND (saved_at  > now() - INTERVAL '5 MINUTES')`, [code]);
+    if (email){
+      return email;
+    }
   } catch(error){
     console.error(error);
+  } finally{
+    pool.end();
   }
 };
 
