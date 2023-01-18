@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const models = require("../models");
-const emailvalidator = require("email-validator");
 const passwordStrength = require("check-password-strength");
 
 router.post("/", (req, res) => {
