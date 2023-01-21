@@ -22,7 +22,6 @@ router.use('/', (req, res, next) => {
   let is_refresh_token_valid = false;
   if (req.cookies) {
     const cookie_arr = Object.keys(req.cookies);
-    console.log("Cookie: ", cookie_arr);
     for (let i = 0; i < cookie_arr.length; i++) {
       if (cookie_arr[i].includes("Bearer")) {
         refresh_token = cookie_arr[i];

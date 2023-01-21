@@ -5,7 +5,7 @@ const emailvalidator = require("email-validator");
 router.post("/", (req, res) => {
   const email = req.body.email;
 
-  if (emailvalidator(email) === false) {
+  if (emailvalidator.validate(email) === false) {
     res.send("Email invalid").status(403);
   }
 

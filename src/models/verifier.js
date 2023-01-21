@@ -9,8 +9,6 @@ const verifier = async (code) => {
     }
   } catch(error){
     console.error(error);
-  } finally{
-    pool.end();
   }
 };
 
