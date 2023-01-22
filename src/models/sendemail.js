@@ -7,7 +7,7 @@ require('dotenv').config();
 const sendemail = (email) => {
   const inserttodb = async (email, code) => {
     try{
-      await pool.query('INSERT INTO email_verification_codes VALUES($1, $2, now())', [email, code]);
+      await pool.query('INSERT INTO Codes VALUES($1, $2, now())', [email, code]);
     } catch(e) {
       console.error(e);
     }

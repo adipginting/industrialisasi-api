@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
   } else if(res.locals.username){
     res.send({'username': res.locals.username}).status(200);
   } else {
-    res.send("Welcome to Industrialisasi. You haven't logged in.").status(200);
+    res.json({'message': 'Welcome to Industrialisasi. You are not logged in.', 'username':''}).status(403);
   }
 });
 

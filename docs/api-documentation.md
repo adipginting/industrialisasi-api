@@ -11,4 +11,4 @@
 
 3. /register
   This end point is used to register all of the required register data: username, password, and the verification string. Usage:
-  curl -X POST -H "Content-Type: application/json" -d '{"verification_code": "c0d3", "username":"example", "password":"p4455wOrd"}' http://industrialisasi.site/register
+  curl -X POST -H "Content-Type: application/json" -d '{"code": "c0d3", "username":"example", "password":"p4455wOrd"}' http://industrialisasi.site/register

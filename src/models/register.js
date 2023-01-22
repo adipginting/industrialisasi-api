@@ -4,12 +4,12 @@ const argon2 = require("argon2");
 const pool = new Pool();
 
 const register = (username, email, password) => {
-  const storelogininformations = async () => {
+  const store_users = async () => {
     try {
       const hash = await argon2.hash(password, {
         type: argon2.argon2i,
       });
-      await pool.query("INSERT INTO login_informations VALUES ($1, $2, $3)", [
+      await pool.query("INSERT INTO Users VALUES ($1, $2, $3)", [
         username,
         email,
         hash,
@@ -18,7 +18,7 @@ const register = (username, email, password) => {
       console.error(error);
     }
   };
-  storelogininformations();
+  store_users();
 };
 
 module.exports = register;
