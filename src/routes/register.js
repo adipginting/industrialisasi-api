@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const models = require("../models");
+const validator = require("validator");
 const { passwordStrength } = require("check-password-strength");
 
 router.post("/", (req, res) => {
@@ -7,6 +8,11 @@ router.post("/", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
+  if (username.length < 3){
+    res.send("Username must be at least three characters").status(403);
+  } else if (validator.isAlphanumeric(username)){
+    res.send("Username must consist of alphabets and numbers.").status(403);
+  }
   if (passwordStrength(password).length < 6) {
     res
       .send("Password is too short. Password must be more than six characters")

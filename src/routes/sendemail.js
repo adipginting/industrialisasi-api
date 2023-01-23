@@ -1,11 +1,11 @@
 const router = require("express").Router();
 const models = require("../models");
-const emailvalidator = require("email-validator");
+const validator = require("validator");
 
 router.post("/", (req, res) => {
   const email = req.body.email;
 
-  if (emailvalidator.validate(email) === false) {
+  if (validator.isEmail(email) === false) {
     res.send("Email invalid").status(403);
   }
 
