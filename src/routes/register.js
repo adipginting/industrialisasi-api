@@ -13,11 +13,11 @@ router.post("/", (req, res) => {
   } else if (validator.isAlphanumeric(username)){
     res.send("Username must consist of alphabets and numbers.").status(403);
   }
-  if (passwordStrength(password).length < 6) {
+  if (password.length < 6) {
     res
       .send("Password is too short. Password must be more than six characters")
       .status(403);
-  } else if (passwordStrength(password).id < 0) {
+  } else if (passwordStrength(password).id < 1) {
     res
       .send(
         "Password is too weak. Use special characters and alphanumeric combinations"
@@ -41,7 +41,7 @@ router.post("/", (req, res) => {
 
       if (is_register_info_valid === true){
         models.register(username, email, password);
-        res.sendStatus(200);
+        res.status(200);
       }
     }
     save_registration(); //call async function here
