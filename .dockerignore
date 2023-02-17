@@ -1,0 +1,7 @@
+.env
+node_modules
+.git
+db
+diags
+docs
+.gitignore
