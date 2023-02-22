@@ -1,4 +1,4 @@
-# industrialisasi-apis
+# Industrialisasi APIs
 This is mainly a personal project to learn about NodeJS, ExpressJS, and APIs in general. This repository contains api end points for Industrialisasi web blog. This software comes at no guarantee and support.
 
 ## Requirements
