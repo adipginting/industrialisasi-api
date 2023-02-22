@@ -1,12 +1,11 @@
 # Industrialisasi APIs
-This is mainly a personal project to learn about NodeJS, ExpressJS, and APIs in general. This repository contains api end points for Industrialisasi web blog. This software comes at no guarantee and support.
+This repository contains the APIs used by Industrialisasi CMS. The APIs are developed mainly using using NodeJS and ExpressJS. This software comes at no guarantee and support. Use at your own risk.
 
 ## Requirements
 1. You need to have Postgres 14 and Node.js 16 installed on your computer. The operating system is preferably Ubuntu.
-2. Create the required tables and database. The example scripts are create-db.sh, create-table.sh, and init.sql on the root directory of this project
-3. Happy learning!
+2. Create the required tables and database. The example scripts are create-db.sh, create-table.sh, and init.sql on the root directory of this project.
 
-## How to run ?
+## How to run this repository?
     git clone https://github.com/adipginting/industrialisasi-apis
     cd industrialisasi-apis
     npm install
@@ -34,3 +33,4 @@ Alternatively, I created a repository to run the whole website i.e. database ser
 - [ ] An api end point to save comment.
 - [ ] An api end point to retrieve comment.
 - [ ] Better security.
+- [ ] Create API documentation using OpenAPI specification.
