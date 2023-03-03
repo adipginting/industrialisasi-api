@@ -14,7 +14,7 @@ router.post("/", (req, res) => {
       res.send("Email has already been registered.").status(403);
     } else {
       models.sendemail(email);
-      res.send(true).status(200);
+      res.send(`An email has been sent to ${email}`).status(200);
     }
   });
 });

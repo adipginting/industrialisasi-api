@@ -30,6 +30,7 @@ router.post('/', (req, res) => {
         res.sendStatus(403);
       }
     } catch(err){
+      console.error(err);
       res.sendStatus(403);
     }
   };

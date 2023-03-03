@@ -37,25 +37,27 @@ router.use('/', (req, res, next) => {
     return "";
   };
 
-  const is_refresh_token_on_db = async () => {
-    let does_it_exist = false;
+  const is_refresh_token_valid = async () => {
+    let is_it_valid = false;
     try{
       if (get_refresh_token() !== "") {
-        does_it_exist = await models.authorization(get_refresh_token());
+        is_it_valid = await models.authorization(get_refresh_token());
       }
     } catch(err){
       if (err){
         console.error(err);
-        does_it_exist = false;
+        is_it_valid = false;
       }
     }
-    return does_it_exist;
+    if (is_it_valid === false)
+      console.log("Line 53 of authorization.js on route. refresh_token does not exist");
+    return is_it_valid;
   };
 
   const username_in_refresh_token = async () => {
     let username = "";
     const refresh_token = get_refresh_token().split(' ')[1];
-    if (await is_refresh_token_on_db() === false) {
+    if (await is_refresh_token_valid() === true) {
       try{
         username = jwt.verify(refresh_token, process.env.secret_key);
       } catch(err){
@@ -70,9 +72,11 @@ router.use('/', (req, res, next) => {
 
   const generate_jwt = async () => {
       try{
-        if (await username_in_access_token() === "" && await username_in_refresh_token() !== "") {
+        if (await username_in_refresh_token() !== "") {
           res.locals.access_token = "Bearer " + jwt.sign({ username: res.locals.username }, process.env.secret_key, { expiresIn: "30m" });
           res.locals.refresh_token = "Bearer " + jwt.sign({ username: res.locals.username }, process.env.secret_key, {expiresIn: "7d" });
+          console.log(res.locals.access_token);
+          console.log(res.locals.refresh_token);
           models.refresh_token(get_refresh_token());
         }
       } catch (err) {

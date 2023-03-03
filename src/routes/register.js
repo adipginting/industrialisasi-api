@@ -8,12 +8,33 @@ router.post("/", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  if (username.length < 3){
+  const save_registration = () => {
+    const get_email = async () => {
+      const email = await models.verifier(code);
+      return email;
+    };
+
+    const is_username_valid = async () => {
+      const does_username_exist = await models.username(username);
+      return does_username_exist;
+    };
+
+    if (typeof get_email() === "undefined") {
+      res.send("Code is not valid.").status(403);
+    } else if (is_username_valid() === true) {
+      res.send("Username has already existed").status(403);
+    } else {
+      models.register(username, email, password);
+      res.send("Registration is successful.").status(200);
+    }
+  };
+
+  if (username.length < 3) {
     res.send("Username must be at least three characters").status(403);
-  } else if (validator.isAlphanumeric(username)){
+  } else if (validator.isAlphanumeric(username) === false) {
     res.send("Username must consist of alphabets and numbers.").status(403);
   }
-  if (password.length < 6) {
+  if (password.length <= 6) {
     res
       .send("Password is too short. Password must be more than six characters")
       .status(403);
@@ -24,27 +45,7 @@ router.post("/", (req, res) => {
       )
       .status(403);
   } else {
-    let is_register_info_valid = true;
-
-    const save_registration = async () => {
-      const email = await models.verifier(code);
-      if (!!email === false){
-          is_register_info_valid = false;
-        }
-
-      const does_username_exist = await models.username(username);
-
-      if (does_username_exist === true){
-          is_register_info_valid = false;
-          res.send('Username has already existed').status(403);
-        }
-
-      if (is_register_info_valid === true){
-        models.register(username, email, password);
-        res.status(200);
-      }
-    }
-    save_registration(); //call async function here
+    save_registration();
   }
 });
 
