@@ -24,7 +24,7 @@ router.post("/", (req, res) => {
     } else if (is_username_valid() === true) {
       res.send("Username has already existed").status(403);
     } else {
-      models.register(username, email, password);
+      models.register(username, get_email(), password);
       res.send("Registration is successful.").status(200);
     }
   };

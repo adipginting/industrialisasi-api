@@ -5,10 +5,10 @@ const { Router } = require('express');
 
 const router = Router();
 router.get('/', (req, res) => {
-  if (res.locals.access_token){
-    res.cookie('refresh_token', res.locals.refresh_token, {secure: true, httpOnly: true});
-    res.send({'username':res.locals.username, 'access_token':res.locals.access_token}).status(200);
-  } else if(res.locals.username){
+  if (typeof res.locals.access_token !== 'undefined' && typeof res.locals.username !== 'undefined'){
+  //  res.cookie('Bearer' + res.locals.refresh_token, {sameSite: "none", secure: true, httpOnly: true});
+    res.send({'username':res.locals.username, access_token: 'Bearer '+ res.locals.access_token}).status(200);
+  } else if(typeof res.locals.username !== 'undefined'){
     res.send({'username': res.locals.username}).status(200);
   } else {
     res.json({'message': 'Welcome to Industrialisasi. You are not logged in.', 'username':''}).status(403);
@@ -16,5 +16,3 @@ router.get('/', (req, res) => {
 });
 
 module.exports = router;
-
-

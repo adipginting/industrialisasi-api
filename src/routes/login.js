@@ -5,33 +5,31 @@ const argon2 = require('argon2');
 require('dotenv').config();
 
 router.post('/', (req, res) => {
-  const does_login_info_match = async (username, password) => {
+  const jwt_token_generation = (username, expiry_time, isCookie) => {
     const user = {'username':username};
-    const jwt_token_generation = (expiry_time, isCookie) => {
-      jwt.sign(user, process.env.secret_key, {expiresIn: expiry_time}, (err, token) => {
-        if (err){
-          res.sendStatus(500);
-        } else {
-          if(isCookie)
-            res.cookie('Bearer ' + token, {secure: true, httpOnly: true});
-          else
-            res.send('Bearer ' + token).status(200);
-        }
-      });
-    }
+    const token = jwt.sign(user, process.env.secret_key, {expiresIn: expiry_time});
+    try{
 
+      if(isCookie){
+        res.cookie('Bearer ' + token, {sameSite: 'none', secure: true, httpOnly: true});
+      } else
+        res.send('Bearer ' + token).status(200);
+    } catch(err) {
+      console.error(err);
+    }
+  };
+
+  const does_login_info_match = async (username, password) => {
     try{
       const hashed_password = await login(username);
       if (await argon2.verify(hashed_password, password)){
-        jwt_token_generation('7d', true); //refresh token
-        jwt_token_generation('30m', false); //access token
-
+        jwt_token_generation(username, '7d', true); //refresh token
+        jwt_token_generation(username, '30m', false); //access token
       } else {
         res.sendStatus(403);
       }
     } catch(err){
       console.error(err);
-      res.sendStatus(403);
     }
   };
 

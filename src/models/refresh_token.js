@@ -1,11 +1,9 @@
 const { Pool } = require('pg');
 const pool = new Pool();
-const argon2 = require('argon2');
 
-const refresh_token = async (token) => {
+const refresh_token = async (refresh_token) => {
   try {
-    const hashed_refresh_token = argon2.hash(token, {type: argon2.argon2i});
-    await pool.query('INSERT INTO HashedRefreshTokens(HashedRefreshToken, AddedAt) VALUES ($1, now())', [hashed_refresh_token]);
+    await pool.query('INSERT INTO RefreshTokens(RefreshToken, AddedAt) VALUES ($1, now())', [refresh_token]);
   } catch (error){
     console.error(error);
   }

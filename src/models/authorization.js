@@ -1,12 +1,9 @@
 const { Pool } = require('pg');
 const pool = new Pool();
-const argon2 = require('argon2');
 
-const authorization = async (token) => {
+const authorization = async (refresh_token) => {
   try {
-    hashed_refresh_token = argon2.hash(token, {type: argon2.argon2i});
-    const result = await pool.query('SELECT EXISTS(SELECT 1 FROM HashedRefreshTokens WHERE HashedRefreshToken = $1 )', [hashed_refresh_token]);
-    console.log(result.rows[0].exists);
+    const result = await pool.query('SELECT EXISTS(SELECT 1 FROM RefreshTokens WHERE RefreshToken = $1 )', [refresh_token]);
     return result.rows[0].exists;
   } catch(error){
     console.error(error);

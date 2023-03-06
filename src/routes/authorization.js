@@ -4,12 +4,14 @@ const models = require("../models");
 require("dotenv").config();
 
 router.use('/', (req, res, next) => {
+  console.log(req.cookies);
   const username_in_access_token = () => {
     let username = "";
     if (typeof req.headers.authorization !== "undefined") {
       const access_token = req.headers.authorization.split(" ")[1];
       try{
-        username = jwt.verify(access_token, process.env.secret_key);
+        const result = jwt.verify(access_token, process.env.secret_key);
+        username = result.username;
       } catch (err) {
         if (err){
           console.error(err);
@@ -21,69 +23,63 @@ router.use('/', (req, res, next) => {
   };
 
   if (username_in_access_token() !== ""){
-    res.locals.get_username();
+    res.locals.username = username_in_access_token();
     next();
   }
 
   const get_refresh_token = () => {
     if (typeof req.cookies !== "undefined") {
-      const cookie_arr = Object.keys(req.cookies);
-      for (let i = 0; i < cookie_arr.length; i++) {
-        if (cookie_arr[i].includes("Bearer")) {
-          return cookie_arr[i];
-        }
-      }
+      const refresh_token_arr = Object.keys(req.cookies);
+      //console.log('Refresh token authorization', refresh_token_arr[0]);
+      return refresh_token_arr[0];
     }
     return "";
   };
 
-  const is_refresh_token_valid = async () => {
-    let is_it_valid = false;
+  const is_refresh_token_in_db = async () => {
     try{
       if (get_refresh_token() !== "") {
-        is_it_valid = await models.authorization(get_refresh_token());
+        return await models.authorization(get_refresh_token());
       }
     } catch(err){
       if (err){
         console.error(err);
-        is_it_valid = false;
       }
     }
-    if (is_it_valid === false)
-      console.log("Line 53 of authorization.js on route. refresh_token does not exist");
-    return is_it_valid;
+    return true;
   };
 
-  const username_in_refresh_token = async () => {
-    let username = "";
-    const refresh_token = get_refresh_token().split(' ')[1];
-    if (await is_refresh_token_valid() === true) {
+  const set_username_to_res_local_username_from_refresh_token = async () => {
+    let token = "";
+    console.log("Tetap semangant", get_refresh_token());
+    if (get_refresh_token() !== ""){
+      token = get_refresh_token().split(' ')[1];
+    }
+    if (await is_refresh_token_in_db() === false) {
       try{
-        username = jwt.verify(refresh_token, process.env.secret_key);
+        const result = jwt.verify(token, process.env.secret_key);
+        res.locals.username = result.username;
       } catch(err){
         if (err){
           console.error(err);
-          username = "";
         }
       }
     }
-    return username;
   };
 
-  const generate_jwt = async () => {
-      try{
-        if (await username_in_refresh_token() !== "") {
-          res.locals.access_token = "Bearer " + jwt.sign({ username: res.locals.username }, process.env.secret_key, { expiresIn: "30m" });
-          res.locals.refresh_token = "Bearer " + jwt.sign({ username: res.locals.username }, process.env.secret_key, {expiresIn: "7d" });
-          console.log(res.locals.access_token);
-          console.log(res.locals.refresh_token);
-          models.refresh_token(get_refresh_token());
-        }
-      } catch (err) {
-        console.error(err);
+  const generate_jwt = () => {
+    try{
+      if (res.locals.username !== "" && typeof res.locals.username !== 'undefined') {
+        res.locals.access_token = jwt.sign({ username: res.locals.username }, process.env.secret_key, { expiresIn: "30m" });
+        res.locals.refresh_token = jwt.sign({ username: res.locals.username }, process.env.secret_key, {expiresIn: "7d" });
+        models.refresh_token(get_refresh_token());
       }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
+  set_username_to_res_local_username_from_refresh_token();
   generate_jwt();
   next();
 });
