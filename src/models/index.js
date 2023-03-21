@@ -8,6 +8,7 @@ const posts = require("./posts");
 const post = require("./post");
 const authorization = require("./authorization");
 const refresh_token = require('./refresh_token');
+const session = require('./session');
 
 module.exports = {
   register,
@@ -19,5 +20,6 @@ module.exports = {
   posts,
   post,
   authorization,
-  refresh_token
+  refresh_token,
+  session
 };

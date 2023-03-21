@@ -4,6 +4,12 @@ CREATE TABLE IF NOT EXISTS Users(
     HashedPassword TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS Sessions(
+    SessionID SERIAL PRIMARY KEY,
+    Username TEXT NOT NULL REFERENCES Users,
+    SessionToken TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS Codes(
     Email TEXT NOT NULL,
     Code TEXT NOT NULL,
@@ -28,7 +34,7 @@ CREATE TABLE IF NOT EXISTS Comments(
     LastEditedAt TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS HashedRefreshTokens(
+CREATE TABLE IF NOT EXISTS RefreshTokens(
     RefreshToken TEXT NOT NULL,
     AddedAt TIMESTAMP NOT NULL
 );

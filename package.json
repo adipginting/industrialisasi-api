@@ -33,6 +33,7 @@
     "nodemon": "^2.0.19",
     "pg": "^8.8.0",
     "randomstring": "^1.2.2",
+    "uuid": "^9.0.0",
     "validator": "^13.7.0",
     "validatorjs": "^3.22.1"
   },
