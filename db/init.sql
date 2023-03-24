@@ -33,8 +33,3 @@ CREATE TABLE IF NOT EXISTS Comments(
     CommentedAt TIMESTAMP NOT NULL,
     LastEditedAt TIMESTAMP
 );
-
-CREATE TABLE IF NOT EXISTS RefreshTokens(
-    RefreshToken TEXT NOT NULL,
-    AddedAt TIMESTAMP NOT NULL
-);
