@@ -25,9 +25,9 @@ Alternatively, I created a repository to run the whole website i.e. database ser
 - [x] Login api end point.
 - [x] An api end point to check email existence on database.
 - [x] An api end point to check username existence on database.
-- [x] An api end point to check JWT token validity.
+- [x] Use session cookie.
 - [x] An api end point to send validation email to users.
-- [x] JWT token generation on login.
+- [x] Session cookie generation on login.
 - [x] An api end point to save post.
 - [x] An api end point to retrieve post.
 - [ ] An api end point to save comment.
