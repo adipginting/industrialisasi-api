@@ -6,9 +6,8 @@ const verifier = require("./verifier");
 const login = require("./login");
 const posts = require("./posts");
 const post = require("./post");
-const authorization = require("./authorization");
-const refresh_token = require('./refresh_token');
 const session = require('./session');
+const session_token_username = require('./session_token_username');
 
 module.exports = {
   register,
@@ -19,7 +18,6 @@ module.exports = {
   login,
   posts,
   post,
-  authorization,
-  refresh_token,
-  session
+  session,
+  session_token_username
 };
