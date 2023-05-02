@@ -14,7 +14,7 @@ app.use("/", routes.root);
 app.use("/register", routes.register);
 app.use("/email", routes.email);
 app.use("/username", routes.username);
-app.use("/sendemail", routes.sendemail);
+app.use("/registered-email", routes.registered_email);
 app.use("/verifier", routes.verifier);
 app.use("/login", routes.login);
 app.use("/posts", routes.posts);

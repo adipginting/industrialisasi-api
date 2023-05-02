@@ -6,15 +6,15 @@ router.post("/", (req, res) => {
   const email = req.body.email;
 
   if (validator.isEmail(email) === false) {
-    res.send("Email invalid").status(403);
+    res.send("Access denied. The email is invalid").status(403);
   }
 
   models.email(email).then((does_email_exist) => {
     if (does_email_exist) {
-      res.send("Email has already been registered.").status(403);
+      res.send("Access denied. The email had been registered.").status(403);
     } else {
       models.sendemail(email);
-      res.send(`An email has been sent to ${email}`).status(200);
+      res.send("OK. An email has been sent.").status(200);
     }
   });
 });
