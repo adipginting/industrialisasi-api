@@ -16,7 +16,7 @@ router.post("/", (req, res) => {
         secure: true,
         sameSite: "none",
       });
-      res.end();
+      res.status(200).send("Login is successful.");
       await models.session(username, token);
     } catch (err) {
       console.error(err);

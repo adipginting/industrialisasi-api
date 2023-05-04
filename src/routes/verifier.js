@@ -1,14 +1,15 @@
-const { Router } = require('express');
-const models = require('../models');
+const { Router } = require("express");
+const models = require("../models");
 
 const router = new Router();
 
-router.post('/', (req, res) => {
+router.post("/", (req, res) => {
   const getverifier = async (code) => {
     try {
       const data = await models.verifier(code);
-      res.send(data).status(200);
-    } catch (error){
+      if (typeof data != "undefined") res.send(data).status(200);
+      else res.sendStatus(403);
+    } catch (error) {
       console.error(error);
     }
   };
