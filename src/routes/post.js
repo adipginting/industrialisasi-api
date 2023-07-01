@@ -1,12 +1,12 @@
-const router = require('express').Router();
-const { post } = require('../models');
+const router = require("express").Router();
+const { post } = require("../models");
 
-router.post('/', (req, res) => {
+router.post("/", (req, res) => {
   const post_post = async () => {
-    try{
+    try {
       await post(req.body.username, req.body.title, req.body.content);
       res.sendStatus(200);
-    } catch(error){
+    } catch (error) {
       console.error(error);
     }
   };
