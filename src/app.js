@@ -5,7 +5,7 @@ const routes = require("./routes");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 app.use(express.urlencoded({ extended: "true" }));
-app.use(express.json());
+app.use(express.json(credentials: true, origin: "https://industrialisasi.site"));
 //app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(cors());
 app.use(cookieParser());
