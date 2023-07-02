@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors({credentials: true, origin: "https://industrialisasi.site"}));
 app.use(cookieParser());
 
-app.use("/", routes.root);
+app.use("/welcome", routes.welcome);
 app.use("/register", routes.register);
 app.use("/email", routes.email);
 app.use("/username", routes.username);

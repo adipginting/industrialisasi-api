@@ -6,7 +6,7 @@ const verifier = require("./verifier");
 const login = require("./login");
 const posts = require("./posts");
 const post = require("./post");
-const root = require("./root");
+const welcome = require("./welcome");
 
 module.exports = {
   register,
@@ -17,5 +17,5 @@ module.exports = {
   login,
   posts,
   post,
-  root,
+  welcome,
 };
