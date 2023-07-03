@@ -4,12 +4,13 @@ const app = express();
 const routes = require("./routes");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
+
 app.use(express.urlencoded({ extended: "true" }));
 app.use(express.json());
-//app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
-app.use(cors({credentials: true, origin: "https://industrialisasi.site"}));
+process.env.production === true
+  ? app.use(cors({ credentials: true, origin: "https://industrialisasi.site" }))
+  : app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(cookieParser());
-
 app.use("/welcome", routes.welcome);
 app.use("/register", routes.register);
 app.use("/email", routes.email);
