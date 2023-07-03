@@ -13,7 +13,7 @@ router.post("/", (req, res) => {
     if (does_email_exist) {
       res.send("Access denied. The email had been registered.").status(403);
     } else {
-      models.registered_email(email);
+      models.email_to_be_registered(email);
       res.send("OK. An email has been sent.").status(200);
     }
   });

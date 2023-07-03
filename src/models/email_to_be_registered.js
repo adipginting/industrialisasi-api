@@ -4,7 +4,7 @@ const { Pool } = require("pg");
 const pool = new Pool();
 require("dotenv").config();
 
-const registered_email = (email) => {
+const email_to_be_registered = (email) => {
   const inserttodb = async (email, code) => {
     try {
       await pool.query("INSERT INTO Codes VALUES($1, $2, now())", [
@@ -27,7 +27,7 @@ const registered_email = (email) => {
   };
 
   const message = {
-    from: proces.env.gmail_user + "@gmail.com",
+    from: process.env.gmail_user + "@gmail.com",
     to: email,
     subject: "Your email verification code for industrialisasi is: " + code,
     text:
@@ -52,4 +52,4 @@ const registered_email = (email) => {
   inserttodb(email, code);
 };
 
-module.exports = registered_email;
+module.exports = email_to_be_registered;
