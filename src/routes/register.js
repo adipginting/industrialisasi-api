@@ -8,7 +8,7 @@ router.post("/", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  const save_registration = () => {
+  const save_registration = async () => {
     const get_email = async () => {
       const email = await models.verifier(code);
       return email;
@@ -19,12 +19,12 @@ router.post("/", (req, res) => {
       return does_username_exist;
     };
 
-    if (typeof get_email() === "undefined") {
+    if (typeof (await get_email()) === "undefined") {
       res.send("Code is not valid.").status(403);
     } else if (is_username_valid() === true) {
       res.send("Username has already existed").status(403);
     } else {
-      models.register(username, get_email(), password);
+      models.register(username, await get_email(), password);
       res.send("Registration is successful.").status(200);
     }
   };
