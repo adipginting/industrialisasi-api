@@ -7,6 +7,7 @@ const login = require("./login");
 const posts = require("./posts");
 const post = require("./post");
 const welcome = require("./welcome");
+const logout = require("./logout");
 
 module.exports = {
   register,
@@ -18,4 +19,5 @@ module.exports = {
   posts,
   post,
   welcome,
+  logout,
 };

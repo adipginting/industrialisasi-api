@@ -10,13 +10,12 @@ router.post("/", (req, res) => {
       const token = uuid.v4();
       const date = new Date();
       date.setMinutes(date.getMinutes() + 30);
-      res.cookie("session-cookie", token, {
+      res.cookie("session-token", token, {
         expires: date,
         httpOnly: true,
         secure: true,
         sameSite: "none",
       });
-      res.status(200).send("Login is successful.");
       await models.session(username, token);
     } catch (err) {
       console.error(err);
@@ -25,11 +24,28 @@ router.post("/", (req, res) => {
 
   const does_login_info_match = async (username, password) => {
     try {
-      const hashed_password = await models.login(username);
-      if (await argon2.verify(hashed_password, password)) {
-        session_cookie(username);
+      if (
+        username === undefined ||
+        password === undefined ||
+        username === "" ||
+        password === ""
+      ) {
+        res.status(200).send(false);
       } else {
-        res.sendStatus(403);
+        const is_username_registered = await models.username(username);
+        let hashed_password = "";
+        if (is_username_registered === true) {
+          hashed_password = await models.login(username);
+        }
+
+        if (hashed_password === "") {
+          res.status(200).send(false);
+        } else if (await argon2.verify(hashed_password, password)) {
+          await session_cookie(username);
+          res.status(200).send(true);
+        } else {
+          res.status(200).send(false);
+        }
       }
     } catch (err) {
       console.error(err);

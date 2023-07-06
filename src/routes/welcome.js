@@ -3,9 +3,9 @@ const models = require("../models");
 const router = Router();
 
 router.get("/", (req, res) => {
-  const session_cookie = req.cookies["session-cookie"];
+  const session_token = req.cookies["session-token"];
   const get_username_using_token_from_db = async () => {
-    const username = await models.session_token_username(session_cookie);
+    const username = await models.session_token_username(session_token);
     res
       .send({
         message: "Welcome to industrialisasi. You are an authenticated user",
@@ -14,8 +14,8 @@ router.get("/", (req, res) => {
       .status(200);
   };
 
-  if (typeof session_cookie !== "undefined") {
-    get_username_using_token_from_db(session_cookie);
+  if (typeof session_token !== "undefined") {
+    get_username_using_token_from_db(session_token);
   } else {
     res
       .send({
