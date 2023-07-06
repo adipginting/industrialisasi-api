@@ -3,7 +3,8 @@ const pool = new Pool();
 
 const logout = async (session_token) => {
   try {
-    await pool.query("DELETE FROM Sessions WHERE sessiontoken=$1", [
+    console.log(session_token);
+    await pool.query("DELETE FROM Sessions WHERE SessionToken=$1", [
       session_token,
     ]);
   } catch (err) {

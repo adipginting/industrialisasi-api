@@ -9,7 +9,7 @@ router.post("/", (req, res) => {
     try {
       const token = uuid.v4();
       const date = new Date();
-      date.setMinutes(date.getMinutes() + 30);
+      date.setDate(date.getDay() + 30);
       res.cookie("session-token", token, {
         expires: date,
         httpOnly: true,

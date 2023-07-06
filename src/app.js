@@ -20,6 +20,6 @@ app.use("/verifier", routes.verifier);
 app.use("/login", routes.login);
 app.use("/posts", routes.posts);
 app.use("/post", routes.post);
-app.use("/post", routes.logout);
+app.use("/logout", routes.logout);
 
 module.exports = app;
