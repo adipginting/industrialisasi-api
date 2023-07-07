@@ -41,7 +41,7 @@ router.post("/", (req, res) => {
   } else if (passwordStrength(password).id < 1) {
     res
       .send(
-        "Password is too weak. Use special characters and alphanumeric combinations"
+        "Password is too weak. Use combinations of special and alphanumeric characters."
       )
       .status(403);
   } else {
