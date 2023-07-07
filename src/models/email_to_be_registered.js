@@ -45,8 +45,6 @@ const email_to_be_registered = (email) => {
   sender.verify((error, success) => {
     if (error) {
       console.error(error);
-    } else {
-      console.log("A verification email was sent to " + email + " " + success);
     }
   });
   inserttodb(email, code);

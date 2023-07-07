@@ -7,7 +7,11 @@ const session_token_username = async (session_token) => {
       "SELECT Username FROM Sessions WHERE sessionToken=$1",
       [session_token]
     );
-    return result.rows[0].username;
+    if (result.rows[0] === undefined) {
+      return "";
+    } else {
+      return result.rows[0].username;
+    }
   } catch (err) {
     console.error(err);
   }
