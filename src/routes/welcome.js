@@ -3,9 +3,10 @@ const models = require("../models");
 const router = Router();
 
 router.get("/", (req, res) => {
-  const session_token = req.cookies["session-token"];
   const get_username_using_token_from_db = async () => {
-    const username = await models.session_token_username(session_token);
+    const username = await models.session_token_username(
+      req.cookies["session_token"]
+    );
     if (username !== "") {
       res
         .send({

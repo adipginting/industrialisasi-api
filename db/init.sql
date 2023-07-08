@@ -1,7 +1,8 @@
 CREATE TABLE IF NOT EXISTS Users(
     Username TEXT PRIMARY KEY,
     Email TEXT NOT NULL,
-    HashedPassword TEXT NOT NULL
+    HashedPassword TEXT NOT NULL,
+    CanPost BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE IF NOT EXISTS Sessions(
