@@ -21,5 +21,6 @@ app.use("/login", routes.login);
 app.use("/posts", routes.posts);
 app.use("/post", routes.post);
 app.use("/logout", routes.logout);
+app.use("/can-user-post", routes.can_user_post);
 
 module.exports = app;

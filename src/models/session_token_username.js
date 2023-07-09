@@ -5,9 +5,9 @@ const session_token_username = async (session_token) => {
   try {
     const result = await pool.query(
       "SELECT Username FROM Sessions WHERE sessionToken=$1",
-      [session_token]
+      [session_token],
     );
-    if (result.rows[0] === undefined) {
+    if (result.rows.length < 1) {
       return "";
     } else {
       return result.rows[0].username;

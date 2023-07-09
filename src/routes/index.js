@@ -8,6 +8,7 @@ const posts = require("./posts");
 const post = require("./post");
 const welcome = require("./welcome");
 const logout = require("./logout");
+const can_user_post = require("./can_user_post");
 
 module.exports = {
   register,
@@ -20,4 +21,5 @@ module.exports = {
   post,
   welcome,
   logout,
+  can_user_post,
 };

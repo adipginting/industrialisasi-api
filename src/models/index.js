@@ -9,6 +9,7 @@ const post = require("./post");
 const session = require("./session");
 const session_token_username = require("./session_token_username");
 const logout = require("./logout");
+const can_user_post = require("./can_user_post");
 
 module.exports = {
   register,
@@ -22,4 +23,5 @@ module.exports = {
   session,
   session_token_username,
   logout,
+  can_user_post,
 };
