@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS Comments(
     Username TEXT NOT NULL REFERENCES Users,
     PostID TEXT NOT NULL REFERENCES Posts,
     CommentID TEXT PRIMARY KEY,
-    TheComment TEXT NOT NULL,
+    Comment TEXT NOT NULL,
     CommentedAt TIMESTAMP NOT NULL,
     LastEditedAt TIMESTAMP
 );

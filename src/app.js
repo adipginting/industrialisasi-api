@@ -7,7 +7,7 @@ require("dotenv").config();
 
 app.use(express.urlencoded({ extended: "true" }));
 app.use(express.json());
-process.env.production === "true"
+process.env.PRODUCTION === "true"
   ? app.use(cors({ credentials: true, origin: "https://industrialisasi.site" }))
   : app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(cookieParser());

@@ -21,13 +21,13 @@ const email_to_be_registered = (email) => {
   const connection = {
     service: "gmail",
     auth: {
-      user: process.env.gmail_user,
-      pass: process.env.gmail_pass,
+      user: process.env.GMAILUSER,
+      pass: process.env.GMAILPASSWORD,
     },
   };
 
   const message = {
-    from: process.env.gmail_user + "@gmail.com",
+    from: process.env.GMAILUSER + "@gmail.com",
     to: email,
     subject: "Your email verification code for industrialisasi is: " + code,
     text:
@@ -42,7 +42,7 @@ const email_to_be_registered = (email) => {
 
   const sender = nodemailer.createTransport(connection);
   sender.sendMail(message);
-  sender.verify((error, success) => {
+  sender.verify((error) => {
     if (error) {
       console.error(error);
     }
