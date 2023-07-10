@@ -38,4 +38,4 @@ Alternatively, I created a repository to run the whole website i.e. database ser
 - [ ] An api end point to save comment.
 - [ ] An api end point to retrieve comment.
 - [ ] Better security.
-- [ ] Create API documentation using OpenAPI specification.
+- [x] Create API documentation using OpenAPI specification.
