@@ -8,7 +8,7 @@ const can_user_post = async (username) => {
   );
 
   if (result.rows.length > 0) {
-    result.rows[0].canpost;
+    return result.rows[0].canpost;
   }
   return false;
 };
