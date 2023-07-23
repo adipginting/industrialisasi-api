@@ -1,6 +1,6 @@
-# Industrialisasi APIs
+# Industrialisasi API
 
-This repository contains the APIs used by Industrialisasi CMS. The APIs are developed mainly using using NodeJS and ExpressJS. This software comes at no guarantee and support. Use at your own risk.
+This repository contains the API end points used by Industrialisasi UI. The API is developed in JavaScript on top of ExpressJS and NodeJS. This software comes at no guarantee and support. Use at your own risk.
 
 ## Requirements
 
@@ -9,15 +9,15 @@ This repository contains the APIs used by Industrialisasi CMS. The APIs are deve
 
 ## How to run this repository?
 
-    git clone https://github.com/adipginting/industrialisasi-apis
-    cd industrialisasi-apis
+    git clone https://github.com/adipginting/industrialisasi-api
+    cd industrialisasi-api
     npm install
     npm start
 
 ## Run via docker
 
-    git clone https://github.com/adipginting/industrialisasi-apis
-    cd industrialisasi-apis
+    git clone https://github.com/adipginting/industrialisasi-api
+    cd industrialisasi-api
     sudo docker run -p 4000:4000 -d
 
 ## Run via docker compose
