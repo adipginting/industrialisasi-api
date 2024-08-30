@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: ["https://industrialisasi.com", "https://www.industrialisasi.com"],
+    origin: ["https://industrialisasi.com", "https://www.industrialisasi.com", "http://localhost:5173"],
   }),
 );
 
