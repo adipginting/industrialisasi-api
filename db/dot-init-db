@@ -1,5 +1,0 @@
-export PGHOST=
-export PGUSER=
-export PGDATABASE=
-export PGPORT=
-export PGPASSWORD=
