@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:20-bookworm
 WORKDIR /usr/local/app
 COPY package*.json ./
 RUN npm install
