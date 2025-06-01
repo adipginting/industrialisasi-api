@@ -1,6 +1,4 @@
 .env
 node_modules
 .git
-db
 .gitignore
-db/.init-db

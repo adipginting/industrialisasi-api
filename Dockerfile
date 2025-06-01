@@ -1,15 +1,19 @@
-FROM node:20-bookworm AS BUILD
+FROM node:20-bookworm AS build
 WORKDIR /usr/local/app
 COPY package*.json ./
-RUN npm install
+
+RUN npm ci
 COPY . .
-RUN npx nest build
+RUN npm run build
 
+FROM node:20-bookworm AS run
+WORKDIR /usr/local/app
 
+COPY --from=build /usr/local/app/package*.json ./
+COPY --from=build /usr/local/app/dist ./dist
 
+RUN npm ci --only=production
 
-expose 4000
+EXPOSE 4000
 
-
-
-CMD ["node", "src/index.js"]
+CMD ["node", "dist/main.js"]
